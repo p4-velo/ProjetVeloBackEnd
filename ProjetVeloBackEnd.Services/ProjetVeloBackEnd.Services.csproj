@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjetVeloBackEnd.DAL.Contracts\ProjetVeloBackEnd.DAL.Contracts.csproj" />
+    <ProjectReference Include="..\ProjetVeloBackEnd.Services.Contracts\ProjetVeloBackEnd.Services.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

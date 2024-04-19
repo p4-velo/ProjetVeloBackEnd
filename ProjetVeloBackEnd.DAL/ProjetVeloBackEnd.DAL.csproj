@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjetVeloBackEnd.DAL.Contracts\ProjetVeloBackEnd.DAL.Contracts.csproj" />
+    <ProjectReference Include="..\ProjetVeloBackEnd.Entities\ProjetVeloBackEnd.Entities.csproj" />
+    <ProjectReference Include="..\ProjetVeloBackEnd.Services.Contracts\ProjetVeloBackEnd.Services.Contracts.csproj" />
+    <ProjectReference Include="..\ProjetVeloBackEnd.Services\ProjetVeloBackEnd.Services.csproj" />
+  </ItemGroup>
+
+</Project>
