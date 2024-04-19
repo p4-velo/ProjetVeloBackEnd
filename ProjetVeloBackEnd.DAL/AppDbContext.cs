@@ -165,7 +165,6 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Place>(entity =>
         {
-            entity.HasKey(e => e.Id);
 
             entity.Property(e => e.City)
                 .IsRequired()

@@ -31,27 +31,16 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Altitude = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Altitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Adress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Location", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Place",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    City = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Adress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Place", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,36 +94,36 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LocationId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false),
+                    PlaceId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Favorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favorite_Location_LocationId",
-                        column: x => x.LocationId,
+                        name: "FK_Favorite_Location_PlaceId",
+                        column: x => x.PlaceId,
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Favorite_User_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Favorite_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorite_LocationId",
+                name: "IX_Favorite_PlaceId",
                 table: "Favorite",
-                column: "LocationId");
+                column: "PlaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorite_UsersId",
+                name: "IX_Favorite_UserId",
                 table: "Favorite",
-                column: "UsersId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Incident_IncidentTypeId",
@@ -155,9 +144,6 @@ namespace ProjetVeloBackEnd.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Incident");
-
-            migrationBuilder.DropTable(
-                name: "Place");
 
             migrationBuilder.DropTable(
                 name: "User");

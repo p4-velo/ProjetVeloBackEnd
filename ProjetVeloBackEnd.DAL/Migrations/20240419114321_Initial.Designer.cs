@@ -11,7 +11,7 @@ using ProjetVeloBackEnd.DAL;
 namespace ProjetVeloBackEnd.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240418170326_Initial")]
+    [Migration("20240419114321_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -32,22 +32,22 @@ namespace ProjetVeloBackEnd.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("PlaceId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Favorite");
                 });
@@ -109,6 +109,11 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
                     b.Property<string>("Latitude")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,39 +125,10 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Location");
-                });
 
-            modelBuilder.Entity("ProjetVeloBackEnd.Entities.Place", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Location");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Place");
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ProjetVeloBackEnd.Entities.User", b =>
@@ -194,23 +170,50 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("ProjetVeloBackEnd.Entities.Place", b =>
+                {
+                    b.HasBaseType("ProjetVeloBackEnd.Entities.Location");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasDiscriminator().HasValue("Place");
+                });
+
             modelBuilder.Entity("ProjetVeloBackEnd.Entities.Favorite", b =>
                 {
-                    b.HasOne("ProjetVeloBackEnd.Entities.Location", "Location")
+                    b.HasOne("ProjetVeloBackEnd.Entities.Place", "Place")
                         .WithMany()
-                        .HasForeignKey("LocationId")
+                        .HasForeignKey("PlaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjetVeloBackEnd.Entities.User", "Users")
+                    b.HasOne("ProjetVeloBackEnd.Entities.User", "User")
                         .WithMany("Favorites")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Location");
+                    b.Navigation("Place");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjetVeloBackEnd.Entities.Incident", b =>
