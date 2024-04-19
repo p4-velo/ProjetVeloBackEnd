@@ -20,7 +20,7 @@ public class AppDbContext : DbContext
     /// <summary>
     /// DbSet for Favorite.
     /// </summary>
-    public virtual DbSet<Favorite> Favorite { get; set; }
+    public virtual DbSet<FavoritePlace> FavoritePlace { get; set; }
 
 
     /// <summary>
@@ -91,7 +91,7 @@ public class AppDbContext : DbContext
     /// <param name="modelBuilder"></param>
     private void FavoriteTableInstantiate(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Favorite>(entity =>
+        modelBuilder.Entity<FavoritePlace>(entity =>
         {
             entity.HasKey(e => e.Id);
 
