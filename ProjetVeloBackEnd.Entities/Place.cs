@@ -1,9 +1,7 @@
 ﻿namespace ProjetVeloBackEnd.Entities;
 
-public class Place
+public class Place : Location
 {
-    public int Id { get; set; }
-
     public required string City { get; set; }
 
     public required string PostalCode { get; set; }
