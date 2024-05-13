@@ -1,10 +1,10 @@
 ﻿namespace ProjetVeloBackEnd.Entities;
 
-public class Favorite
+public class FavoritePlace
 {
     public required int Id { get; set; }
 
-    public required Location Location { get; set; }
+    public required Place Place { get; set; }
 
     public required User Users { get; set; }
 

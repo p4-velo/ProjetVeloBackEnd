@@ -16,6 +16,5 @@ public class User
 
     public bool IsAdmin { get; set; }
 
-    public List<Favorite> Favorites { get; set; }
-
+    public List<FavoritePlace> FavoritePlaces { get; set; }
 }
