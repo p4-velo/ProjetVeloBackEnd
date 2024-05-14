@@ -9,7 +9,7 @@ namespace projet_velo_back_end.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Authorize]
 public class PlaceController : Controller
 {
     private readonly ICRUDService<Place> _placeService;
