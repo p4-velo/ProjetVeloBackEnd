@@ -1,5 +1,5 @@
 ﻿namespace ProjetVeloBackEnd.Services.Contracts.Models;
 
-public interface IPLaceService
+public interface IPlaceService
 {
 }
