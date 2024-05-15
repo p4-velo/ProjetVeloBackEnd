@@ -1,4 +1,6 @@
-﻿namespace ProjetVeloBackEnd.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace ProjetVeloBackEnd.Entities;
 
 public class User
 {
@@ -16,5 +18,5 @@ public class User
 
     public bool IsAdmin { get; set; }
 
-    public List<FavoritePlace> FavoritePlaces { get; set; }
+    public List<FavoritePlace>? FavoritePlaces { get; set; }
 }
