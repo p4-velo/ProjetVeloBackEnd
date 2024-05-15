@@ -14,3 +14,4 @@ public class DbContextEntityFactory : IDesignTimeDbContextFactory<AppDbContext>
         return new AppDbContext(optionsBuilder.Options);
     }
 }
+//
