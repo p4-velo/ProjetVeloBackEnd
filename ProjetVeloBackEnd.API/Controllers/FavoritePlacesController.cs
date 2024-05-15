@@ -24,13 +24,20 @@ namespace ProjetVeloBackEnd.API.Controllers
         [Route("{id}")]
         public async Task<FavoritePlace> GetById(int id)
         {
-            return await _favoritePlaceService.Get(x => x.Id == id);
+            var favorite =  await _favoritePlaceService.Get(x => x.Id == id);
+
+            if (favorite == null)
+            {
+                throw new Exception("Error - No data");
+            }
+
+            return favorite;
         }
 
         // Gets a place for a user.
         [HttpGet]
         [Route("user/{idUser}")]
-        public async Task<List<FavoritePlace?>> GetByUser(int idUser)
+        public async Task<List<FavoritePlace>> GetByUser(int idUser)
         {
             return await _favoritePlaceAppService.GetFavoritePlacesByUser(idUser);
         }

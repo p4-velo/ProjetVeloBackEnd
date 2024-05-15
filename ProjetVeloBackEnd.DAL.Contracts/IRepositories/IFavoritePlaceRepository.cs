@@ -1,8 +1,8 @@
 ﻿using ProjetVeloBackEnd.Entities;
 
-namespace ProjetVeloBackEnd.DAL.Contracts.Models
+namespace ProjetVeloBackEnd.DAL.Contracts.IRepositories
 {
-    public interface IFavoritePlaceRepository: IRepository<FavoritePlace>
+    public interface IFavoritePlaceRepository
     {
         /// <summary>
         /// Gets FavoritePlaces by user.
