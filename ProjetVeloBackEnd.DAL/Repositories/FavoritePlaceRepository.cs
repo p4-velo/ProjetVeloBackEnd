@@ -17,7 +17,7 @@ namespace ProjetVeloBackEnd.DAL.Repositories
         {
             try
             {
-                var allUsers = await _repository.GetAll().Result.Where(x => x.Users.Id == userId, false).ToList();
+                var allUsers = await _repository.GetAll();
                 var userFavorites = allUsers.Where(x => x.Users.Id == userId).ToList();
 
                 return userFavorites;
