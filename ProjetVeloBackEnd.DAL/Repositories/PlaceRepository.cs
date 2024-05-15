@@ -6,7 +6,7 @@ using ProjetVeloBackEnd.Services.Contracts.Models;
 
 namespace ProjetVeloBackEnd.DAL.Models;
 
-public class PlaceService : CRUDService<Place>, IPLaceService
+public class PlaceRepository : CRUDService<Place>, IPLaceService
 {
-    public PlaceService(IRepository<Place> repository) : base(repository) { }
+    public PlaceRepository(IRepository<Place> repository) : base(repository) { }
 }
