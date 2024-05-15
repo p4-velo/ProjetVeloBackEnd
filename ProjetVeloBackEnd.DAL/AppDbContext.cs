@@ -1,16 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ProjetVeloBackEnd.Entities;
 
 namespace ProjetVeloBackEnd.DAL;
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<IdentityUser>
 {
     /// <summary>
     /// Call the base constructor.
     /// </summary>
     /// <param name="options"></param>
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
+    {}
 
     /// <summary>
     /// DbSet for User.
