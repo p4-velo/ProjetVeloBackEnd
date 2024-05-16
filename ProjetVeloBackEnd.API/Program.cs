@@ -8,8 +8,7 @@ using ProjetVeloBackEnd.Services;
 using ProjetVeloBackEnd.Services.Contracts;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 using ProjetVeloBackEnd.Services.Models;
-
-
+using static Microsoft.AspNetCore.Http.StatusCodes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,7 +79,11 @@ if (app.Environment.IsDevelopment())
 
 app.MapIdentityApi<IdentityUser>();
 
-app.UseHttpsRedirection();
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.RedirectStatusCode = Status307TemporaryRedirect;
+    options.HttpsPort = 5001;
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
