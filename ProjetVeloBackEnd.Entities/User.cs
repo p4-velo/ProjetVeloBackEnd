@@ -16,5 +16,7 @@ public class User
 
     public required string Password { get; set; }
 
+    public required int Xp { get; set; }
+
     public bool IsAdmin { get; set; }
 }

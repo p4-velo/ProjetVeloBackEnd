@@ -1,14 +1,8 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace ProjetVeloBackEnd.Entities;
 
-namespace ProjetVeloBackEnd.Entities;
-
-public class FavoritePlace
+public class FavoritePlace : Place
 {
-    public required int Id { get; set; }
-
-    public required Location Location { get; set; }
-
     public required int IdUser { get; set; }
 
-    public required string Name { get; set; }
+    public required string Title { get; set; }
 }

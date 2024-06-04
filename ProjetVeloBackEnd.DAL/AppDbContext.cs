@@ -121,7 +121,6 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
                 .IsRequired()
                 .HasMaxLength(20);
 
-            entity.HasOne(e => e.Location);
         });
     }
 
