@@ -19,6 +19,11 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public virtual DbSet<User> User { get; set; }
 
     /// <summary>
+    /// DbSet for User.
+    /// </summary>
+    public virtual DbSet<Location> Location { get; set; }
+
+    /// <summary>
     /// DbSet for Favorite.
     /// </summary>
     public virtual DbSet<FavoritePlace> FavoritePlace { get; set; }
@@ -116,8 +121,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
                 .IsRequired()
                 .HasMaxLength(20);
 
-            entity.HasOne(e => e.Location)
-            .WithMany(e => e.Incidents);
+            entity.HasOne(e => e.Location);
         });
     }
 
@@ -166,6 +170,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         modelBuilder.Entity<Place>(entity =>
         {
+            entity.HasKey(e => e.Id);
 
             entity.Property(e => e.City)
                 .IsRequired()

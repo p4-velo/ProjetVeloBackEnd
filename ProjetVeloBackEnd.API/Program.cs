@@ -63,6 +63,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(ICRUDService<>), typeof(CRUDService<>));
 builder.Services.AddScoped<IFavoritePlaceService, FavoritePlaceService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<IIncidentService, IncidentService>();
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();

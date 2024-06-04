@@ -17,6 +17,4 @@ public class User
     public required string Password { get; set; }
 
     public bool IsAdmin { get; set; }
-
-    public List<FavoritePlace>? FavoritePlaces { get; set; }
 }

@@ -6,7 +6,7 @@ public class FavoritePlace
 {
     public required int Id { get; set; }
 
-    public required Place Place { get; set; }
+    public required Location Location { get; set; }
 
     public required int IdUser { get; set; }
 
