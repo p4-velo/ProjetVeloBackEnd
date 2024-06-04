@@ -1,22 +1,16 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace ProjetVeloBackEnd.Entities;
 
-public class User
+public class User : IdentityUser
 {
     public int Id { get; set; }
 
-    public required string FirstName { get; set; }
-
-    public required string LastName { get; set; }
-
-    public required string Email { get; set; }
-
-    public required string Pseudo { get; set; }
-
-    public required string Password { get; set; }
-
-    public bool IsAdmin { get; set; }
 
     public List<FavoritePlace>? FavoritePlaces { get; set; }
+
+    public User()
+    {
+        FavoritePlaces = new List<FavoritePlace>();
+    }
 }

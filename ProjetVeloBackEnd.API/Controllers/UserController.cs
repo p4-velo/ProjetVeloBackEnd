@@ -28,7 +28,7 @@ public class UserController : Controller
             {
                 foreach (var favoritePlace in user.FavoritePlaces)
                 {
-                    favoritePlace.idUser = user.Id; // Associez l'utilisateur à chaque FavoritePlace
+                    favoritePlace.IdUser = user.Id; // Associez l'utilisateur à chaque FavoritePlace
                 }
             }
 

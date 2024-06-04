@@ -8,7 +8,7 @@ public class FavoritePlace
 
     public required Place Place { get; set; }
 
-    public required int idUser { get; set; }
+    public required int IdUser { get; set; }
 
     public required string Name { get; set; }
 }

@@ -242,7 +242,7 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("idUser")
+                    b.Property<int>("IdUser")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
