@@ -23,15 +23,6 @@ public class UserController : Controller
     {
         try
         {
-            // Si vous avez besoin de gérer les FavoritePlaces, vous pouvez le faire ici avant d'insérer l'utilisateur
-            if (user.FavoritePlaces != null)
-            {
-                foreach (var favoritePlace in user.FavoritePlaces)
-                {
-                    favoritePlace.IdUser = user.Id; // Associez l'utilisateur à chaque FavoritePlace
-                }
-            }
-
             await _userService.Insert(user);
             return Ok();
         }
