@@ -228,6 +228,9 @@ namespace ProjetVeloBackEnd.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -237,9 +240,6 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
