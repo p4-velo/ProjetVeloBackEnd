@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.OpenApi.Models;
 using ProjetVeloBackEnd.DAL;
 using ProjetVeloBackEnd.DAL.Contracts;
+using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services;
 using ProjetVeloBackEnd.Services.Contracts;
 using ProjetVeloBackEnd.Services.Contracts.Models;
@@ -48,16 +49,19 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
+// add authentication
+builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 
 builder.Services.AddAuthorization();
 
-
-//Call DbContextfactory to create the DbContext
+// configure dbcontext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseInMemoryDatabase("AppDb"));
+builder.Services
+    .AddIdentityCore<User>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddApiEndpoints();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(ICRUDService<>), typeof(CRUDService<>));
@@ -65,16 +69,17 @@ builder.Services.AddScoped<IFavoritePlaceService, FavoritePlaceService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IIncidentService, IncidentService>();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
 builder.Services.AddHttpsRedirection(options =>
 {
     options.RedirectStatusCode = Status307TemporaryRedirect;
     options.HttpsPort = 5001;
 });
 
+
+
 var app = builder.Build();
+
+app.MapIdentityApi<User>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -84,11 +89,6 @@ if (app.Environment.IsDevelopment())
     
 }
 
-app.MapIdentityApi<IdentityUser>();
-
-
-
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

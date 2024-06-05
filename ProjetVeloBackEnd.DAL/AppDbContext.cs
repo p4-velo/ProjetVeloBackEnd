@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjetVeloBackEnd.Entities;
 
 namespace ProjetVeloBackEnd.DAL;
-public class AppDbContext : IdentityDbContext<IdentityUser>
+public class AppDbContext : IdentityDbContext<User>
 {
     /// <summary>
     /// Call the base constructor.
@@ -71,30 +71,8 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
         {
             entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.FirstName)
-                .IsRequired()
-                .HasMaxLength(150);
-
-            entity.Property(e => e.LastName)
-                .IsRequired()
-                .HasMaxLength(150);
-
-            entity.Property(e => e.Password)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            entity.Property(e => e.Email);
-
             entity.Property(e => e.Xp)
-                .IsRequired()
-                .HasMaxLength(20)
-                .HasDefaultValue(0);
-
-            entity.Property(e => e.Pseudo)
-            .IsRequired();
-
-            entity.Property(e => e.IsAdmin)
-            .IsRequired();
+                .IsRequired();
         });
     }
 
@@ -109,6 +87,8 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.Title)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            entity.HasDiscriminator();
         });
     }
 
