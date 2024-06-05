@@ -18,19 +18,6 @@ public class UserController : Controller
     {
         _userService = userService;
     }
-    [HttpPost]
-    public async Task<IActionResult> Add(User user)
-    {
-        try
-        {
-            await _userService.Insert(user);
-            return Ok();
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
 
 }
 
