@@ -19,6 +19,11 @@ public class AppDbContext : IdentityDbContext<User>
     public virtual DbSet<User> User { get; set; }
 
     /// <summary>
+    /// DbSet for User.
+    /// </summary>
+    public virtual DbSet<Location> Location { get; set; }
+
+    /// <summary>
     /// DbSet for Favorite.
     /// </summary>
     public virtual DbSet<FavoritePlace> FavoritePlace { get; set; }
@@ -66,6 +71,8 @@ public class AppDbContext : IdentityDbContext<User>
         {
             entity.HasKey(e => e.Id);
 
+            entity.Property(e => e.Xp)
+                .IsRequired();
         });
     }
 
@@ -77,11 +84,11 @@ public class AppDbContext : IdentityDbContext<User>
     {
         modelBuilder.Entity<FavoritePlace>(entity =>
         {
-            entity.HasKey(e => e.Id);
-
-            entity.Property(e => e.Name)
+            entity.Property(e => e.Title)
                 .IsRequired()
-                .HasMaxLength(250);
+                .HasMaxLength(50);
+
+            entity.HasDiscriminator();
         });
     }
 
@@ -93,14 +100,13 @@ public class AppDbContext : IdentityDbContext<User>
     {
         modelBuilder.Entity<Incident>(entity =>
         {
-            entity.HasKey(e => e.Id);
-
             entity.Property(e => e.CountFinished)
                 .IsRequired()
                 .HasMaxLength(20);
 
-            entity.HasOne(e => e.Location)
-            .WithMany(e => e.Incidents);
+            entity.HasOne(e => e.IncidentType);
+
+            entity.HasDiscriminator();
         });
     }
 
@@ -117,6 +123,10 @@ public class AppDbContext : IdentityDbContext<User>
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            entity.Property(e => e.Icon)
+                .IsRequired()
+                .HasMaxLength(250);
         });
     }
 
@@ -138,6 +148,8 @@ public class AppDbContext : IdentityDbContext<User>
 
             entity.Property(e => e.Altitude)
                 .IsRequired();
+
+            entity.HasDiscriminator();
         });
     }
 
@@ -149,7 +161,6 @@ public class AppDbContext : IdentityDbContext<User>
     {
         modelBuilder.Entity<Place>(entity =>
         {
-
             entity.Property(e => e.City)
                 .IsRequired()
                 .HasMaxLength(250);
@@ -166,6 +177,7 @@ public class AppDbContext : IdentityDbContext<User>
                 .IsRequired()
                 .HasMaxLength(250);
 
+            entity.HasDiscriminator();
         });
     }
 }
