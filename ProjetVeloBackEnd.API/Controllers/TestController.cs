@@ -7,7 +7,7 @@ namespace ProjetVeloBackEnd.API.Controllers
         [HttpGet("test")]
         public string get()
         {
-            return "hello world";
+            return "Hello world !";
         }
     }
 }
