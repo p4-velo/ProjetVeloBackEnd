@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 using ProjetVeloBackEnd.Services.Models;
@@ -7,6 +8,7 @@ namespace ProjetVeloBackEnd.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+//[Authorize]
 public class IncidentController : Controller
 {
     private readonly IIncidentService _incidentService;
