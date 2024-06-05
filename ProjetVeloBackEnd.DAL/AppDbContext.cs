@@ -83,6 +83,13 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
                 .IsRequired()
                 .HasMaxLength(50);
 
+            entity.Property(e => e.Email);
+
+            entity.Property(e => e.Xp)
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasDefaultValue(0);
+
             entity.Property(e => e.Pseudo)
             .IsRequired();
 
@@ -99,11 +106,9 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         modelBuilder.Entity<FavoritePlace>(entity =>
         {
-            entity.HasKey(e => e.Id);
-
-            entity.Property(e => e.Name)
+            entity.Property(e => e.Title)
                 .IsRequired()
-                .HasMaxLength(250);
+                .HasMaxLength(50);
         });
     }
 
@@ -115,12 +120,13 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         modelBuilder.Entity<Incident>(entity =>
         {
-            entity.HasKey(e => e.Id);
-
             entity.Property(e => e.CountFinished)
                 .IsRequired()
                 .HasMaxLength(20);
 
+            entity.HasOne(e => e.IncidentType);
+
+            entity.HasDiscriminator();
         });
     }
 
@@ -137,6 +143,10 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            entity.Property(e => e.Icon)
+                .IsRequired()
+                .HasMaxLength(250);
         });
     }
 
@@ -158,6 +168,8 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
 
             entity.Property(e => e.Altitude)
                 .IsRequired();
+
+            entity.HasDiscriminator();
         });
     }
 
@@ -169,8 +181,6 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         modelBuilder.Entity<Place>(entity =>
         {
-            entity.HasKey(e => e.Id);
-
             entity.Property(e => e.City)
                 .IsRequired()
                 .HasMaxLength(250);
@@ -187,6 +197,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
                 .IsRequired()
                 .HasMaxLength(250);
 
+            entity.HasDiscriminator();
         });
     }
 }
