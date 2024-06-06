@@ -28,7 +28,7 @@ public class IncidentController : Controller
     {
         try
         {
-            _incidentService.AddIncident(incident);
+            await _incidentService.AddIncident(incident);
             return Ok();
         }
         catch (Exception e)
@@ -47,7 +47,7 @@ public class IncidentController : Controller
     {
         try
         {
-            var favoritePlace = _incidentService.GetIncidentById(id);
+            var favoritePlace = await _incidentService.GetIncidentById(id);
             return Ok(favoritePlace);
         }
         catch (Exception e)
@@ -65,7 +65,7 @@ public class IncidentController : Controller
     {
         try
         {
-            var listIncidents = _incidentService.GetActiveIncidents();
+            var listIncidents = await _incidentService.GetActiveIncidents();
             return Ok(listIncidents);
         }
         catch (Exception e)
@@ -84,7 +84,7 @@ public class IncidentController : Controller
     {
         try
         {
-            _incidentService.IncrementCountIncident(id);
+            await _incidentService.IncrementCountIncident(id);
             return Ok();
         }
         catch (Exception e)

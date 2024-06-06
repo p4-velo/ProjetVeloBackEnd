@@ -1,22 +1,19 @@
-﻿using ProjetVeloBackEnd.Entities;
+﻿using ProjetVeloBackEnd.DAL.Contracts;
+using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 
 namespace ProjetVeloBackEnd.Services.Models
 {
-    public class FavoritePlaceService : IFavoritePlaceService
+    public class FavoritePlaceService : CRUDService<FavoritePlace>, IFavoritePlaceService
     {
-        private readonly ICRUDService<FavoritePlace> _favoritePlaceService;
-
-        public FavoritePlaceService(ICRUDService<FavoritePlace> favoritePlaceService)
-        {
-            _favoritePlaceService = favoritePlaceService;
-        }
+ 
+        public FavoritePlaceService(IRepository<FavoritePlace> favoritePlaceRepository) : base(favoritePlaceRepository){}
 
         // <inheritdoc />
-        public FavoritePlace GetFavoritePlacesById(int id)
+        public async Task<FavoritePlace> GetFavoritePlacesById(int id)
         {
-            var favoritePlace = _favoritePlaceService.Get(f => f.Id == id).Result ;
+            var favoritePlace = await Get(f => f.Id == id) ;
 
             if (favoritePlace == null)
             {
@@ -27,25 +24,29 @@ namespace ProjetVeloBackEnd.Services.Models
         }
 
         // <inheritdoc />
-        public List<FavoritePlace> GetFavoritePlacesByUser(int idUser)
+        public async Task<List<FavoritePlace>> GetFavoritePlacesByUser(int idUser)
         {
-            var favoritePlacesList = _favoritePlaceService.GetAll(p => p.IdUser == idUser, orderBy: p => p.OrderBy(p => p.Name));
-            var favoritePlaces = favoritePlacesList.Result.ToList();
+            
+            var favoritePlacesList = await GetAll(p => p.idUser == idUser, orderBy: p => p.OrderBy(p => p.Name));
+            var favoritePlaces = favoritePlacesList.ToList();
 
             if (favoritePlaces != null)
             {
                 throw new Exception("Error - No favorite places found for this user.");
             }
-
-            return favoritePlaces;
+            else
+            {
+                return favoritePlaces;
+            }
+           
         }
 
         // <inheritdoc />
-        public void InsertFavoritePlaces(FavoritePlace favoritePlace)
+        public async Task InsertFavoritePlaces(FavoritePlace favoritePlace)
         {
             try
             {
-                _favoritePlaceService.Insert(favoritePlace);
+                await Insert(favoritePlace);
             }
             catch (Exception e)
             {
@@ -54,11 +55,11 @@ namespace ProjetVeloBackEnd.Services.Models
         }
 
         // <inheritdoc />
-        public void UpdateFavoritePlace(FavoritePlace favoritePlace)
+        public async Task UpdateFavoritePlace(FavoritePlace favoritePlace)
         {
             try
             {
-                _favoritePlaceService.Update(favoritePlace);
+                await Update(favoritePlace);
             }
             catch (Exception e)
             {
@@ -67,12 +68,12 @@ namespace ProjetVeloBackEnd.Services.Models
         }
 
         // <inheritdoc />
-        public void DeleteFavoritePlace(int id)
+        public async Task DeleteFavoritePlace(int id)
         {
             try
             {
-                var favoritePlace = GetFavoritePlacesById(id);
-                _favoritePlaceService.Delete(favoritePlace);
+                var favoritePlace = await GetFavoritePlacesById(id);
+                await Delete(favoritePlace);
             }
             catch (Exception e)
             {
