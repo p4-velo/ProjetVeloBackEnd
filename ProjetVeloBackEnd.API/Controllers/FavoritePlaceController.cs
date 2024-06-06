@@ -13,17 +13,9 @@ namespace projet_velo_back_end.API.Controllers;
 public class FavoritePlaceController : Controller
 {
     private readonly IFavoritePlaceService _favoritePlaceService;
-    private readonly ICRUDService<FavoritePlace> cRUDService;
-    public FavoritePlaceController(IFavoritePlaceService favoritePlaceService, ICRUDService<FavoritePlace> cRUD)
+    public FavoritePlaceController(IFavoritePlaceService favoritePlaceService)
     {
         _favoritePlaceService = favoritePlaceService;
-        cRUDService = cRUD;
-    }
-
-    [HttpGet]
-    public async Task<IList<FavoritePlace>> GetAll()
-    {
-        return await cRUDService.GetAll();
     }
 
     /// <summary>

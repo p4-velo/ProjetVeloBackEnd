@@ -27,10 +27,10 @@ namespace ProjetVeloBackEnd.Services.Models
         public async Task<List<FavoritePlace>> GetFavoritePlacesByUser(int idUser)
         {
             
-            var favoritePlacesList = await GetAll(p => p.idUser == idUser, orderBy: p => p.OrderBy(p => p.Name));
+            var favoritePlacesList = await GetAll(p => p.IdUser == idUser, orderBy: p => p.OrderBy(p => p.Name));
             var favoritePlaces = favoritePlacesList.ToList();
 
-            if (favoritePlaces != null)
+            if (favoritePlaces is null)
             {
                 throw new Exception("Error - No favorite places found for this user.");
             }

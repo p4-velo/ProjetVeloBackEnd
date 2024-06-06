@@ -79,7 +79,7 @@ public class IncidentController : Controller
     /// </summary>
     /// <param name="id">Id of the incident that we want to increment the finisher counter.</param>
     /// <returns>Returns a status code 200 and the asked favorite place in case of success or status code 500 in case of failure.</returns>
-    [HttpPut("{id}")]
+    [HttpPut("{id}")] /// revoir le mot http en patch
     public async Task<IActionResult> IncrementIncidentCount(int id)
     {
         try
