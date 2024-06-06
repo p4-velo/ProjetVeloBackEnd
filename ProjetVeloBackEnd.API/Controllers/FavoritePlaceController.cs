@@ -44,11 +44,11 @@ public class FavoritePlaceController : Controller
     /// <returns>Returns a status code 200 and the asked favorite places for the user in case of success
     /// or status code 400 in case of failure.</returns>
     [HttpGet("User/{id}")]
-    public async Task<IActionResult> GetFavoritePlacesByUser(int idUser)
+    public async Task<IActionResult> GetFavoritePlacesByUser(int id)
     {
         try
         {
-            var listFavoritePlaces = _favoritePlaceService.GetFavoritePlacesByUser(idUser);
+            var listFavoritePlaces = _favoritePlaceService.GetFavoritePlacesByUser(id);
             return Ok(listFavoritePlaces);
         }
         catch (Exception e)
