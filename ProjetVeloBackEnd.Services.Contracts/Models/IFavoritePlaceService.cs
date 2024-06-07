@@ -1,4 +1,6 @@
 ﻿using ProjetVeloBackEnd.Entities;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Down;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Up;
 
 namespace ProjetVeloBackEnd.Services.Contracts.Models
 {
@@ -9,26 +11,26 @@ namespace ProjetVeloBackEnd.Services.Contracts.Models
         /// </summary>
         /// <param name="id">Id of the favorite item we want.</param>
         /// <returns>Return a <see cref="FavoritePlace"/> entities.</returns>
-        public Task<FavoritePlace> GetFavoritePlacesById(int id);
+        public Task<FavoritePlaceDtoUp> GetFavoritePlacesById(int id);
 
         /// <summary>
         /// Gets all favorite places by user.
         /// </summary>
         /// <param name="idUser">Id of the user whom you want favorite places of.</param>
         /// <returns>Return a <see cref="FavoritePlace"/> list based on the users favorites.</returns>
-        public Task<List<FavoritePlace>> GetFavoritePlacesByUser(int idUser);
+        public Task<List<FavoritePlaceDtoUp>> GetFavoritePlacesByUser(int idUser);
 
         /// <summary>
         /// Inserts a favorite place in the database.
         /// </summary>
         /// <param name="favoritePlace">Entities you want to register.</param>
-        public Task InsertFavoritePlaces(FavoritePlace favoritePlace);
+        public Task InsertFavoritePlaces(FavoritePlaceRegisterDtoDown favoritePlace);
 
         /// <summary>
         /// Updates a favorite place in the database.
         /// </summary>
         /// <param name="favoritePlace">Entities that will overwrite database's object.</param>
-        public Task UpdateFavoritePlace(FavoritePlace favoritePlace);
+        public Task UpdateFavoritePlace(FavoritePlaceUpdateDtoDown favoritePlace);
 
         /// <summary>
         /// Deletes a favorite place in the database.

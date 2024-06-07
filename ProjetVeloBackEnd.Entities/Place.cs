@@ -8,5 +8,5 @@ public class Place : Location
 
     public required string Adress { get; set; }
 
-    public required string Name { get; set; }
+    public string Name { get; set; }
 }

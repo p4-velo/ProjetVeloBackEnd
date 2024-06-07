@@ -174,8 +174,7 @@ public class AppDbContext : IdentityDbContext<User>
                 .HasMaxLength(250);
 
             entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(250);
+                .HasMaxLength(50);
 
             entity.HasDiscriminator();
         });

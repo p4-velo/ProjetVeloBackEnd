@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Down;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 using ProjetVeloBackEnd.Services.Models;
 
@@ -21,10 +22,10 @@ public class IncidentController : Controller
     /// <summary>
     /// Adds an incident to the database.
     /// </summary>
-    /// <param name="incident"> <see cref="Incident"/> model carrying the data to register.</param>
+    /// <param name="incident"> <see cref="IncidentRegisterDtoDown"/> model carrying the data to register.</param>
     /// <returns>Returns a status code 200 and the asked favorite place in case of success or status code 500 in case of failure.</returns>
     [HttpPost()]
-    public async Task<IActionResult> AddIncident(Incident incident)
+    public async Task<IActionResult> AddIncident(IncidentRegisterDtoDown incident)
     {
         try
         {
