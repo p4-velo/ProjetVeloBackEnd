@@ -40,7 +40,7 @@ public class PlaceController : Controller
         try
         {
             await _placeService.Insert(place);
-            return Ok();
+            return Ok(place);
         }
         catch (Exception e)
         {

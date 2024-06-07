@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
+using ProjetVeloBackEnd.Services.Contracts;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 
 
@@ -12,7 +13,6 @@ namespace projet_velo_back_end.API.Controllers;
 public class FavoritePlaceController : Controller
 {
     private readonly IFavoritePlaceService _favoritePlaceService;
-
     public FavoritePlaceController(IFavoritePlaceService favoritePlaceService)
     {
         _favoritePlaceService = favoritePlaceService;
@@ -28,7 +28,7 @@ public class FavoritePlaceController : Controller
     {
         try
         {
-            var favoritePlace = _favoritePlaceService.GetFavoritePlacesById(id);
+            var favoritePlace = await _favoritePlaceService.GetFavoritePlacesById(id);
             return Ok(favoritePlace);
         }
         catch (Exception e)
@@ -40,7 +40,7 @@ public class FavoritePlaceController : Controller
     /// <summary>
     /// Gets all favorite places by user.
     /// </summary>
-    /// <param name="idUser">Id of the user whom you want favorites of.</param>
+    /// <param name="id">Id of the user whom you want favorites of.</param>
     /// <returns>Returns a status code 200 and the asked favorite places for the user in case of success
     /// or status code 400 in case of failure.</returns>
     [HttpGet("User/{id}")]
@@ -48,7 +48,7 @@ public class FavoritePlaceController : Controller
     {
         try
         {
-            var listFavoritePlaces = _favoritePlaceService.GetFavoritePlacesByUser(id);
+            var listFavoritePlaces = await _favoritePlaceService.GetFavoritePlacesByUser(id);
             return Ok(listFavoritePlaces);
         }
         catch (Exception e)
@@ -67,7 +67,7 @@ public class FavoritePlaceController : Controller
     {
         try
         {
-            _favoritePlaceService.InsertFavoritePlaces(favoritePlace);
+            await _favoritePlaceService.InsertFavoritePlaces(favoritePlace);
             return Ok();
         }
         catch (Exception e)
@@ -86,7 +86,7 @@ public class FavoritePlaceController : Controller
     {
         try
         {
-            _favoritePlaceService.UpdateFavoritePlace(favoritePlace);
+            await _favoritePlaceService.UpdateFavoritePlace(favoritePlace);
             return Ok();
         }
         catch (Exception e)
@@ -105,7 +105,7 @@ public class FavoritePlaceController : Controller
     {
         try
         {
-            _favoritePlaceService.DeleteFavoritePlace(id);
+            await _favoritePlaceService.DeleteFavoritePlace(id);
             return Ok();
         }
         catch (Exception e)

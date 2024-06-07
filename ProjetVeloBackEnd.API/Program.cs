@@ -78,6 +78,8 @@ builder.Services.AddScoped(typeof(ICRUDService<>), typeof(CRUDService<>));
 builder.Services.AddScoped<IFavoritePlaceService, FavoritePlaceService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IIncidentService, IncidentService>();
+builder.Services.AddScoped<IPLaceService, PlaceService>();
+
 
 builder.Services.AddHttpsRedirection(options =>
 {

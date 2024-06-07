@@ -1,21 +1,18 @@
-﻿using ProjetVeloBackEnd.Entities;
+﻿using ProjetVeloBackEnd.DAL.Contracts;
+using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 
 namespace ProjetVeloBackEnd.Services.Models
 {
-    public class IncidentService : IIncidentService
+    public class IncidentService : CRUDService<Incident>, IIncidentService
     {
-        private readonly ICRUDService<Incident> _incidentService;
 
-        public IncidentService(ICRUDService<Incident> incidentService)
-        {
-            _incidentService = incidentService;
-        }
+        public IncidentService(IRepository<Incident> incidentRepository): base(incidentRepository) {}
 
-        public Incident GetIncidentById(int id)
+        public async Task<Incident> GetIncidentById(int id)
         {
-            var incident = _incidentService.Get(f => f.Id == id).Result;
+            var incident = await this.Get(f => f.Id == id);
 
             if (incident == null)
             {
@@ -25,10 +22,10 @@ namespace ProjetVeloBackEnd.Services.Models
             return incident;
         }
 
-        public List<Incident> GetActiveIncidents()
+        public async Task<List<Incident>> GetActiveIncidents()
         {
-            var incidentsList = _incidentService.GetAll(p => p.CountFinished < 5);
-            var incidents = incidentsList.Result.ToList();
+            var incidentsList = await this.GetAll(p => p.CountFinished < 5);
+            var incidents = incidentsList.ToList();
 
             if (incidents == null)
             {
@@ -38,10 +35,10 @@ namespace ProjetVeloBackEnd.Services.Models
             return incidents;
         }
 
-        public List<Incident> GetInactiveIncidents()
+        public async Task<List<Incident>> GetInactiveIncidents()
         {
-            var incidentsList = _incidentService.GetAll(p => p.CountFinished >= 5);
-            var incidents = incidentsList.Result.ToList();
+            var incidentsList = await this.GetAll(p => p.CountFinished >= 5);
+            var incidents = incidentsList.ToList();
 
             if (incidents == null)
             {
@@ -51,11 +48,11 @@ namespace ProjetVeloBackEnd.Services.Models
             return incidents;
         }
 
-        public void AddIncident(Incident incident)
+        public async Task AddIncident(Incident incident)
         {
             try
             {
-                _incidentService.Insert(incident);
+                await this.Insert(incident);
             }
             catch (Exception e)
             {
@@ -63,13 +60,13 @@ namespace ProjetVeloBackEnd.Services.Models
             }
         }
 
-        public void IncrementCountIncident(int idIncident)
+        public async Task IncrementCountIncident(int idIncident)
         {
             try
             {
-                var incident = _incidentService.Get(f => f.Id == idIncident).Result;
+                var incident = await this.Get(f => f.Id == idIncident);
                 incident.CountFinished++;
-                _incidentService.Update(incident);
+                await this.Update(incident);
             }
             catch (Exception e)
             {
