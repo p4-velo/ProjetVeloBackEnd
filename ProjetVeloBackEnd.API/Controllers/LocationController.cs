@@ -21,18 +21,14 @@ public class LocationController : Controller
     [HttpGet("{latitude}&{longitude}")]
     public async Task<Location> GetByLongLat(string latitude, string longitude)
     {
-        var location = _locationService.GetLocationByLongLat(latitude, longitude);
-
-        return location;
+        return await _locationService.GetLocationByLongLat(latitude, longitude);
     }
 
     // controller which displays all favorite places in the database
     [HttpGet("{id}")]
     public async Task<Location> GetById(int id)
     {
-        var location = _locationService.GetLocationById(id);
-
-        return location;
+        return await _locationService.GetLocationById(id);
     }
 
     // controller which adds a favorite place to the database
@@ -41,9 +37,9 @@ public class LocationController : Controller
     {
         try
         {
-            _locationService.InsertLocation(location);
+            await _locationService.InsertLocation(location);
 
-            return Ok();
+            return Ok(location);
         }
         catch (Exception e)
         {
@@ -56,7 +52,7 @@ public class LocationController : Controller
     {
         try
         {
-            _locationService.DeleteLocationByLongLat(latitude, longitude);
+            await _locationService.DeleteLocationByLongLat(latitude, longitude);
             return Ok();
         }
         catch (Exception e)
@@ -70,7 +66,7 @@ public class LocationController : Controller
     {
         try
         {
-            _locationService.DeleteLocationById(id);
+            await _locationService.DeleteLocationById(id);
             return Ok();
         }
         catch (Exception e)

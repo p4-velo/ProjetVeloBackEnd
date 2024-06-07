@@ -5,7 +5,7 @@
 namespace ProjetVeloBackEnd.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class evolutionofentities : Migration
+    public partial class IdUserEvolution : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
