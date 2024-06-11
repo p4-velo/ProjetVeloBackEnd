@@ -45,6 +45,11 @@ public class AppDbContext : IdentityDbContext<User>
     public virtual DbSet<Place> Place { get; set; }
 
     /// <summary>
+    /// DbSet for RapportCamera.
+    /// </summary
+    public virtual DbSet<RapportCamera> RapportCamera { get; set; }
+
+    /// <summary>
     /// OnModelCreating builder.
     /// </summary>
     /// <param name="modelBuilder"></param>
@@ -58,6 +63,7 @@ public class AppDbContext : IdentityDbContext<User>
         IncidentTypeTableInstantiate(modelBuilder);
         LocationTableInstantiate(modelBuilder);
         PlaceTableInstantiate(modelBuilder);
+        RapportCameraTableInstantiate(modelBuilder);
 
     }
 
@@ -177,6 +183,23 @@ public class AppDbContext : IdentityDbContext<User>
                 .HasMaxLength(50);
 
             entity.HasDiscriminator();
+        });
+    }
+
+    /// <summary>
+    /// RapportCamera table instantiation.
+    /// </summary>
+    private void RapportCameraTableInstantiate(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<RapportCamera>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Date)
+                .IsRequired();
+
+            entity.Property(e => e.IdCamera)
+                .IsRequired();
         });
     }
 }

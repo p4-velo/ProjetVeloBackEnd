@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts.DTO.Down;
 using ProjetVeloBackEnd.Services.Contracts.Models;
-using ProjetVeloBackEnd.Services.Models;
 
 namespace ProjetVeloBackEnd.API.Controllers;
 

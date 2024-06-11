@@ -79,6 +79,7 @@ builder.Services.AddScoped<IFavoritePlaceService, FavoritePlaceService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IIncidentService, IncidentService>();
 builder.Services.AddScoped<IPLaceService, PlaceService>();
+builder.Services.AddScoped<IRapportCamera, RapportCameraService>();
 
 
 builder.Services.AddHttpsRedirection(options =>
