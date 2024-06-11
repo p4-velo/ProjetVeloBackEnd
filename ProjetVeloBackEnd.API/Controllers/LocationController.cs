@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
-using ProjetVeloBackEnd.Services.Contracts;
 using ProjetVeloBackEnd.Services.Contracts.Models;
-using ProjetVeloBackEnd.Services.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 [ApiController]
 [Route("api/[controller]")]
