@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts;
-using System;
-
 
 namespace projet_velo_back_end.API.Controllers;
 

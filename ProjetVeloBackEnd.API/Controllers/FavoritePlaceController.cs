@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Down;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Up;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 
 
@@ -29,6 +31,7 @@ public class FavoritePlaceController : Controller
         try
         {
             var favoritePlace = await _favoritePlaceService.GetFavoritePlacesById(id);
+
             return Ok(favoritePlace);
         }
         catch (Exception e)
@@ -49,6 +52,7 @@ public class FavoritePlaceController : Controller
         try
         {
             var listFavoritePlaces = await _favoritePlaceService.GetFavoritePlacesByUser(id);
+
             return Ok(listFavoritePlaces);
         }
         catch (Exception e)
@@ -63,7 +67,7 @@ public class FavoritePlaceController : Controller
     /// <param name="favoritePlace">Entities we want to save in database.</param>
     /// <returns>Returns a status code 200 in case of success or status code 400 in case of failure.</returns>
     [HttpPost]
-    public async Task<IActionResult> AddFavoritePlace(FavoritePlace favoritePlace)
+    public async Task<IActionResult> AddFavoritePlace(FavoritePlaceRegisterDtoDown favoritePlace)
     {
         try
         {
@@ -82,7 +86,7 @@ public class FavoritePlaceController : Controller
     /// <param name="favoritePlace">Entities we want to modify in database.</param>
     /// <returns>Returns a status code 200 in case of success or status code 400 in case of failure.</returns>
     [HttpPut]
-    public async Task<IActionResult> UpdateFavoritePlace(FavoritePlace favoritePlace)
+    public async Task<IActionResult> UpdateFavoritePlace(FavoritePlaceUpdateDtoDown favoritePlace)
     {
         try
         {

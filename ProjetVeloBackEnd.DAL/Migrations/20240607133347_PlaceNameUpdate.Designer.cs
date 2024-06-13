@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetVeloBackEnd.DAL;
 
@@ -11,9 +12,11 @@ using ProjetVeloBackEnd.DAL;
 namespace ProjetVeloBackEnd.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240607133347_PlaceNameUpdate")]
+    partial class PlaceNameUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,31 +213,6 @@ namespace ProjetVeloBackEnd.DAL.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Location");
 
                     b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("ProjetVeloBackEnd.Entities.RapportCamera", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DroiteAGauche")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GaucheADroite")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCamera")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RapportCamera");
                 });
 
             modelBuilder.Entity("ProjetVeloBackEnd.Entities.User", b =>

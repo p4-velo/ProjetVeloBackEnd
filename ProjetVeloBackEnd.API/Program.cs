@@ -12,6 +12,8 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddEnvironmentVariables();
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -79,6 +81,7 @@ builder.Services.AddScoped<IFavoritePlaceService, FavoritePlaceService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IIncidentService, IncidentService>();
 builder.Services.AddScoped<IPLaceService, PlaceService>();
+builder.Services.AddScoped<IRapportCamera, RapportCameraService>();
 
 
 builder.Services.AddHttpsRedirection(options =>

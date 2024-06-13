@@ -1,6 +1,8 @@
 ﻿using ProjetVeloBackEnd.DAL.Contracts;
 using ProjetVeloBackEnd.Entities;
 using ProjetVeloBackEnd.Services.Contracts;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Down;
+using ProjetVeloBackEnd.Services.Contracts.DTO.Up;
 using ProjetVeloBackEnd.Services.Contracts.Models;
 
 namespace ProjetVeloBackEnd.Services.Models
@@ -10,53 +12,89 @@ namespace ProjetVeloBackEnd.Services.Models
 
         public IncidentService(IRepository<Incident> incidentRepository): base(incidentRepository) {}
 
-        public async Task<Incident> GetIncidentById(int id)
+        public async Task<IncidentDtoUp> GetIncidentById(int id)
         {
-            var incident = await this.Get(f => f.Id == id);
+            var incidentModel = await this.Get(f => f.Id == id);
 
-            if (incident == null)
+            if (incidentModel == null)
             {
                 throw new Exception("Error - Incident doesn't exist.");
             }
 
+            var incident = new IncidentDtoUp()
+            {
+                Id = incidentModel.Id.Value,
+                Latitude = incidentModel.Latitude,
+                Longitude = incidentModel.Longitude,
+                Altitude = incidentModel.Altitude,
+                IncidentType = incidentModel.IncidentType
+            };
+
             return incident;
         }
 
-        public async Task<List<Incident>> GetActiveIncidents()
+        public async Task<List<IncidentDtoUp>> GetActiveIncidents()
         {
-            var incidentsList = await this.GetAll(p => p.CountFinished < 5);
-            var incidents = incidentsList.ToList();
+            var incidentsListModel = await this.GetAll(p => p.CountFinished < 5);
+            var incidentsModel = incidentsListModel.ToList();
 
-            if (incidents == null)
+            if (incidentsModel == null)
             {
                 throw new Exception("Error - No active incidents found.");
             }
 
+            var incidents = incidentsModel.Select(incidentModel => new IncidentDtoUp()
+            {
+                Id = incidentModel.Id.Value,
+                Latitude = incidentModel.Latitude,
+                Longitude = incidentModel.Longitude,
+                Altitude = incidentModel.Altitude,
+                IncidentType = incidentModel.IncidentType
+            }).ToList();    
+
             return incidents;
         }
 
-        public async Task<List<Incident>> GetInactiveIncidents()
+        public async Task<List<IncidentDtoUp>> GetInactiveIncidents()
         {
-            var incidentsList = await this.GetAll(p => p.CountFinished >= 5);
-            var incidents = incidentsList.ToList();
+            var incidentsListModel = await this.GetAll(p => p.CountFinished >= 5);
+            var incidentsModel = incidentsListModel.ToList();
 
-            if (incidents == null)
+            if (incidentsModel == null)
             {
                 throw new Exception("Error - No inactive incidents found.");
             }
 
+            var incidents = incidentsModel.Select(incidentModel => new IncidentDtoUp()
+            {
+                Id = incidentModel.Id.Value,
+                Latitude = incidentModel.Latitude,
+                Longitude = incidentModel.Longitude,
+                Altitude = incidentModel.Altitude,
+                IncidentType = incidentModel.IncidentType
+            }).ToList();
+
             return incidents;
         }
 
-        public async Task AddIncident(Incident incident)
+        public async Task AddIncident(IncidentRegisterDtoDown incident)
         {
             try
             {
-                await this.Insert(incident);
+                var incidentModel = new Incident
+                {
+                    Latitude = incident.Latitude,
+                    Longitude = incident.Longitude,
+                    Altitude = incident.Altitude,
+                    IncidentType = incident.IncidentType,
+                    CountFinished = 0
+                };
+
+                await this.Insert(incidentModel);
             }
             catch (Exception e)
             {
-                throw new Exception("Error - Could not insert incident: " + e.Message);
+                throw new Exception("Error - Could not insert incidentModel: " + e.Message);
             }
         }
 
@@ -70,7 +108,7 @@ namespace ProjetVeloBackEnd.Services.Models
             }
             catch (Exception e)
             {
-                throw new Exception("Error - Could not update incident: " + e.Message);
+                throw new Exception("Error - Could not update incidentModel: " + e.Message);
             }
         }
     }
