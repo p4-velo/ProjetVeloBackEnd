@@ -14,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddEnvironmentVariables();
 
+var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+Console.WriteLine($"Connection string: {connectionString}");    
+
 // Add services to the container.
 builder.Services.AddControllers();
 
