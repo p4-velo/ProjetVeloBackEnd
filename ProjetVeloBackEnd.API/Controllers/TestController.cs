@@ -4,10 +4,13 @@ namespace ProjetVeloBackEnd.API.Controllers
 {
     public class TestController : Controller
     {
+
+
         [HttpGet("test")]
         public string get()
         {
-            return "Hello world !";
+            return Environment.GetEnvironmentVariable("DefaultConnection");
+             
         }
     }
 }
