@@ -15,7 +15,7 @@ namespace ProjetVeloBackEnd.API.Controllers
         [HttpGet("test")]
         public string get()
         {
-            return _configuration.GetConnectionString("DefaultConnection");
+            return "test";
              
         }
     }
