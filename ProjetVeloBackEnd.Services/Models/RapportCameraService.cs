@@ -27,8 +27,8 @@ namespace ProjetVeloBackEnd.Services.Models
                 {
                     Id = rap.Id,
                     IdCamera = rap.IdCamera,
-                    GaucheADroite = rap.GaucheADroite,
-                    DroiteAGauche = rap.DroiteAGauche,
+                    NombrePlace = rap.NombrePlace,
+                    NombreVelos = rap.NombreVelos,
                     Date = rap.Date
                 }).ToList();
 
@@ -47,8 +47,8 @@ namespace ProjetVeloBackEnd.Services.Models
                 var rapportCameraModel = new RapportCamera
                 {
                     IdCamera = rapportCamera.IdCamera,
-                    GaucheADroite = rapportCamera.GaucheADroite,
-                    DroiteAGauche = rapportCamera.DroiteAGauche,
+                    NombrePlace = rapportCamera.NombrePlace,
+                    NombreVelos = rapportCamera.NombreVelos,
                     Date = rapportCamera.Date
                 };
 
