@@ -9,8 +9,8 @@ namespace ProjetVeloBackEnd.Services.Contracts.DTO.Down
     public class RapportCameraRegisterDtoDown
     {
         public required int IdCamera { get; set; }
-        public int GaucheADroite { get; set; }
-        public int DroiteAGauche { get; set; }
+        public int NombrePlace { get; set; }
+        public int NombreVelos { get; set; }
         public required DateTime Date { get; set; }
     }
 }

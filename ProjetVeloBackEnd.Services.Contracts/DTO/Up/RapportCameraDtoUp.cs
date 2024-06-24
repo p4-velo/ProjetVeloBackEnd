@@ -10,8 +10,8 @@ namespace ProjetVeloBackEnd.Services.Contracts.DTO.Up
     {
         public required int Id { get; set; }
         public required int IdCamera { get; set; }
-        public required int GaucheADroite { get; set; }
-        public required int DroiteAGauche { get; set; }
+        public required int NombrePlace { get; set; }
+        public required int NombreVelos { get; set; }
         public required DateTime Date { get; set; }
     }
 }
