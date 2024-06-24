@@ -11,6 +11,5 @@ namespace ProjetVeloBackEnd.Services.Contracts.DTO.Down
         public required int IdCamera { get; set; }
         public int NombrePlace { get; set; }
         public int NombreVelos { get; set; }
-        public required DateTime Date { get; set; }
     }
 }

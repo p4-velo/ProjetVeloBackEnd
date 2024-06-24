@@ -48,8 +48,7 @@ namespace ProjetVeloBackEnd.Services.Models
                 {
                     IdCamera = rapportCamera.IdCamera,
                     NombrePlace = rapportCamera.NombrePlace,
-                    NombreVelos = rapportCamera.NombreVelos,
-                    Date = rapportCamera.Date
+                    NombreVelos = rapportCamera.NombreVelos
                 };
 
                 await Insert(rapportCameraModel);
