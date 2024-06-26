@@ -21,7 +21,13 @@ public class PlaceController : Controller
     [HttpGet]
     public async Task<IList<Place>> GetAll()
     {
-        return await _placeService.GetAll();
+        try
+        {
+            return await _placeService.GetAll();
+        }catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
     }
 
     // controller which displays a place by its id
