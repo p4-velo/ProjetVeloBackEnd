@@ -139,7 +139,7 @@ namespace ProjetVeloBackEnd.Services.Models
         {
             try
             {
-                var favoritePlace = await GetFavoritePlacesById(id);
+                var favoritePlace = await Get(f => f.Id == id);
 
                 if (favoritePlace == null)
                 {
