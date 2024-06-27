@@ -41,7 +41,7 @@ public class PlaceService : CRUDService<Place>, IPLaceService
 
             var place = new PlaceDtoUp()
             {
-                Id = placeModel.Id.Value,
+                Id = placeModel.Id,
                 Latitude = placeModel.Latitude,
                 Longitude = placeModel.Longitude,
                 Altitude = placeModel.Altitude,

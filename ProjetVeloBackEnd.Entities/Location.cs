@@ -2,7 +2,7 @@
 
 public class Location
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     public required string Longitude { get; set; }
 
