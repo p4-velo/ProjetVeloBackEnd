@@ -12,6 +12,6 @@ namespace ProjetVeloBackEnd.Entities
         public required int IdCamera { get; set; }
         public required int NombrePlace { get; set; }
         public required int NombreVelos { get; set; }
-        public required DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }

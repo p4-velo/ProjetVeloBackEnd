@@ -23,7 +23,7 @@ namespace ProjetVeloBackEnd.Services.Models
 
             var incident = new IncidentDtoUp()
             {
-                Id = incidentModel.Id.Value,
+                Id = incidentModel.Id,
                 Latitude = incidentModel.Latitude,
                 Longitude = incidentModel.Longitude,
                 Altitude = incidentModel.Altitude,
@@ -45,7 +45,7 @@ namespace ProjetVeloBackEnd.Services.Models
 
             var incidents = incidentsModel.Select(incidentModel => new IncidentDtoUp()
             {
-                Id = incidentModel.Id.Value,
+                Id = incidentModel.Id,
                 Latitude = incidentModel.Latitude,
                 Longitude = incidentModel.Longitude,
                 Altitude = incidentModel.Altitude,
@@ -67,7 +67,7 @@ namespace ProjetVeloBackEnd.Services.Models
 
             var incidents = incidentsModel.Select(incidentModel => new IncidentDtoUp()
             {
-                Id = incidentModel.Id.Value,
+                Id = incidentModel.Id,
                 Latitude = incidentModel.Latitude,
                 Longitude = incidentModel.Longitude,
                 Altitude = incidentModel.Altitude,

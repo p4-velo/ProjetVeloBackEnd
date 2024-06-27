@@ -26,7 +26,7 @@ namespace ProjetVeloBackEnd.Services.Models
 
                 var favoritePlace = new FavoritePlaceDtoUp()
                 {
-                    Id = favoritePlaceModel.Id.Value,
+                    Id = favoritePlaceModel.Id,
                     Latitude = favoritePlaceModel.Latitude,
                     Longitude = favoritePlaceModel.Longitude,
                     Altitude = favoritePlaceModel.Altitude,
@@ -61,7 +61,7 @@ namespace ProjetVeloBackEnd.Services.Models
 
                 var listFavoritePlaces = favoritePlaces.Select(fav => new FavoritePlaceDtoUp()
                 {
-                    Id = fav.Id.Value,
+                    Id = fav.Id,
                     Latitude = fav.Latitude,
                     Longitude = fav.Longitude,
                     Altitude = fav.Altitude,
@@ -139,13 +139,29 @@ namespace ProjetVeloBackEnd.Services.Models
         {
             try
             {
-                var favoritePlace = await Get(f => f.Id == id);
+                var favoritePlace = await GetFavoritePlacesById(id);
 
                 if (favoritePlace == null)
                 {
                     throw new Exception("Error - Favorite place doesn't exist.");
                 }
-                await Delete(favoritePlace);
+                    
+                FavoritePlace favoritePlaceEntity =   new FavoritePlace()
+                {
+                    Id = favoritePlace.Id,
+                    Latitude = favoritePlace.Latitude,
+                    Longitude = favoritePlace.Longitude,
+                    Altitude = favoritePlace.Altitude,
+                    Title = favoritePlace.Title,
+                    City = favoritePlace.City,
+                    PostalCode = favoritePlace.PostalCode,
+                    Adress = favoritePlace.Adress,
+                    Name = favoritePlace.Name,
+                    IdUser = favoritePlace.UserId
+                };
+
+                FavoritePlace[] favoritePlaceArray = [favoritePlaceEntity];
+                await DeleteRange(favoritePlaceArray);
             }
             catch (Exception e)
             {
